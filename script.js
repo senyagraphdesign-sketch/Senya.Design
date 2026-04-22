@@ -280,14 +280,10 @@ contactForm.addEventListener('submit', async (e) => {
     }
     return;
   }
+<form action="https://formspree.io/f/xvzdwdej" method="POST">
 
-  // --- Simulation d'envoi (à remplacer par votre backend / Formspree) ---
-  // Pour connecter un vrai service d'email, remplacez ce bloc par :
-  // Option 1 — Formspree : <form action="https://formspree.io/f/VOTRE_ID" method="POST">
-  // Option 2 — EmailJS : emailjs.send(...)
-  // Option 3 — Votre propre API
-
- <form action="https://formspree.io/f/xvzdwdej" method="POST">
+   submitBtn.classList.add('loading'); 
+   submitBtn.disabled = true;
 
   try {
     // Simuler une requête réseau (1.5s)
