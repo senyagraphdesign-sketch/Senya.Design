@@ -281,35 +281,42 @@ contactForm.addEventListener('submit', async (e) => {
     return;
   }
 
-   <form action="https://formspree.io/f/xvzdwdej" method="POST">
-
-   submitBtn.classList.add('loading'); 
-   submitBtn.disabled = true;
+  // --- Envoi via Formspree ---
+  submitBtn.classList.add('loading');
+  submitBtn.disabled = true;
 
   try {
-    // Simuler une requête réseau (1.5s)
-    await fakeSubmit();
+    const formData = new FormData(contactForm);
 
-    // Succès !
-    showNotification('success', '✨ Merci pour votre message ! Je vous répondrai dans les 24–48h. À très vite ! 🌸');
-    contactForm.reset();
+    const response = await fetch('https://formspree.io/f/xvzdwdej', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
 
-    // Scroll vers la notification
-    formNotification.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (response.ok) {
+      // Succès !
+      showNotification('success', '✨ Merci pour votre message ! Je vous répondrai dans les 24–48h. À très vite ! 🌸');
+      contactForm.reset();
+
+      // Scroll vers la notification
+      formNotification.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      const data = await response.json();
+      const errorMsg = data?.errors?.map(e => e.message).join(', ') || 'Erreur inconnue.';
+      showNotification('error', `😟 Envoi échoué : ${errorMsg}. Veuillez réessayer.`);
+    }
 
   } catch (err) {
-    // Erreur
+    // Erreur réseau
     showNotification('error', '😟 Une erreur est survenue. Veuillez réessayer ou me contacter directement par email.');
   } finally {
     submitBtn.classList.remove('loading');
     submitBtn.disabled = false;
   }
 });
-
-// Simule un appel réseau (à remplacer par un vrai fetch)
-function fakeSubmit() {
-  return new Promise((resolve) => setTimeout(resolve, 1500));
-}
 
 function showNotification(type, message) {
   formNotification.className = 'form-notification ' + type;
