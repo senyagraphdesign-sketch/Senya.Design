@@ -280,7 +280,8 @@ contactForm.addEventListener('submit', async (e) => {
     }
     return;
   }
-<form action="https://formspree.io/f/xvzdwdej" method="POST">
+
+   <form action="https://formspree.io/f/xvzdwdej" method="POST">
 
    submitBtn.classList.add('loading'); 
    submitBtn.disabled = true;
