@@ -287,8 +287,7 @@ contactForm.addEventListener('submit', async (e) => {
   // Option 2 — EmailJS : emailjs.send(...)
   // Option 3 — Votre propre API
 
-  submitBtn.classList.add('loading');
-  submitBtn.disabled = true;
+ <form action="https://form.jotform.com/261103805328046" method="POST">
 
   try {
     // Simuler une requête réseau (1.5s)
