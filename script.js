@@ -287,7 +287,7 @@ contactForm.addEventListener('submit', async (e) => {
   // Option 2 — EmailJS : emailjs.send(...)
   // Option 3 — Votre propre API
 
- <form action="https://form.jotform.com/261103805328046" method="POST">
+ <form action="https://formspree.io/f/xvzdwdej" method="POST">
 
   try {
     // Simuler une requête réseau (1.5s)
